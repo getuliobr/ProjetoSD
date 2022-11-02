@@ -9,3 +9,8 @@ Projeto da disciplina de Sistemas Distribuidos.
 # Diagrama
 
 <img src="util\utPlace.jpg"/>
+
+
+# Dependências
+
+- FastAPI
