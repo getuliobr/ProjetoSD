@@ -14,3 +14,5 @@ Projeto da disciplina de Sistemas Distribuidos.
 # Dependências
 
 - FastAPI
+- websockets
+- uvicorn

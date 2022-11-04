@@ -1,0 +1,27 @@
+version: '3'
+
+services:
+  web:
+    image: redis:alpine
+    ports:
+      - "6379:6379"
+    volumes:
+      - ./data:/data
+    command: redis-server --appendonly yes
+    restart: always
+    depends_on:
+      - app
+  app:
+    build: .
+    volumes:
+      - .:/app
+    ports:
+      - "3000:3000"
+  db:
+    image: cassandra:3.11
+    environment:
+      - CASSANDRA_CLUSTER_NAME=Test Cluster
+      - CASSANDRA_DC=DC1
+      - CASSANDRA_RACK=RAC1
+      - CASSANDRA_ENDPOINT_SNITCH=GossipingPropertyFileSnitch
+      - CASSANDRA_SEEDS=

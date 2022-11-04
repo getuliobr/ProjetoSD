@@ -4,6 +4,9 @@ from numpy import append
 app = FastAPI()
 
 @app.get("/")
-def read_root():
+def get_tiles():
     return {"Hello": "World"}
 
+@app.put("/")
+def put_tile():
+    return {"Gomu Gomu no mi": "Elephant Gun"}
