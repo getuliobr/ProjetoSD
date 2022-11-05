@@ -5,6 +5,12 @@ Projeto da disciplina de Sistemas Distribuidos.
 - Getúlio Coimbra Regis
 - Igor Lara Oliveira
 
+# Como rodar
+Com o docker aberto digite o comando
+	
+	docker compose up
+
+
 
 # Diagrama
 
