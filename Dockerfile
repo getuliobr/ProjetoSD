@@ -14,8 +14,9 @@ RUN apt-get update && apt-get install -y \
 COPY requirements.txt .
 RUN pip install --upgrade pip
 RUN pip install -r requirements.txt
-COPY /* /app/
-RUN pwd
-RUN ls
+COPY . /usr/src/app
+WORKDIR /usr/src/app
 
-ENTRYPOINT [ "uvicorn", "Server.main:app" ]
+EXPOSE 8000
+
+ENTRYPOINT [ "uvicorn", "Server.main:app", "--port", "8000", "--host", "0.0.0.0", "--reload" ]

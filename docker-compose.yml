@@ -16,7 +16,7 @@ services:
     volumes:
       - .:/app
     ports:
-      - "3000:3000"
+      - "8000:8000"
   db:
     image: cassandra:3.11
     environment:
