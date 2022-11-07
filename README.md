@@ -2,8 +2,23 @@
 Projeto da disciplina de Sistemas Distribuidos.
 
 # Alunos
-- Getúlio Coimbra Regis
-- Igor Lara Oliveira
+
+<center>
+<table><tr>
+<td align="center"><a href="https://github.com/getuliobr">
+ <img style="border-radius: 50%;" src="https://avatars.githubusercontent.com/u/51160837?v=4" width="100px;" alt=""/>
+<br />
+ <b>Getúlio Coimbra Regis</b></a>
+ <a href="https://github.com/getuliobr" title="GitHub Getulio"></a>
+
+<td align="center"><a href="https://github.com/nuisigor">
+ <img style="border-radius: 50%;" src="https://avatars.githubusercontent.com/u/50688059?v=4" width="100px;" alt=""/>
+<br />
+ <b>Igor Lara Oliveira</b>
+ </a> <a href="https://github.com/nuisigor" title="GitHub Igor"></a>
+
+</tr></table>
+</center>
 
 # Tecnologias utilizadas
 <div style="display: inline_block"><br>
