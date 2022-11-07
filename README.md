@@ -14,7 +14,7 @@ Projeto da disciplina de Sistemas Distribuidos.
 <td align="center"><a href="https://github.com/nuisigor">
  <img style="border-radius: 50%;" src="https://avatars.githubusercontent.com/u/50688059?v=4" width="100px;" alt=""/>
 <br />
- <b>Igor Lara Oliveira</b>
+ <b>Igor Lara de Oliveira</b>
  </a> <a href="https://github.com/nuisigor" title="GitHub Igor"></a>
 
 </tr></table>
