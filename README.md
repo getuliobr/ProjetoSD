@@ -32,8 +32,6 @@ Projeto da disciplina de Sistemas Distribuidos.
   <a href="https://cassandra.apache.org/_/index.html"><img align="center" alt="cassandra" height="50" width="60" src="https://upload.wikimedia.org/wikipedia/commons/5/5e/Cassandra_logo.svg"/><a>
   <a href="https://redis.io/"><img align="center" alt="redis" height="50" width="60" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/redis/redis-original-wordmark.svg"/><a>
 
-
-	
 </div>
 
 # Como rodar
@@ -41,7 +39,63 @@ Com o docker aberto digite o comando
 	
 	docker compose up
 
+# Interfaces de serviço
 
+Todas as mensagens cliente servidor são em formato JSON.
+
+## Websocket
+1. Receber uma modificação de pixel
+
+	Toda vez que um usuário modificar um pixel, todos os usuários são notificados por uma mensagem no websocket, com a seguinte estrutura
+
+	```py
+	{
+		"x": int,
+		"y": int,
+		"color": string
+	}
+	```
+
+	Sendo *x* e *y* as coordenadas de cada pixel no quadro, e a color a cor desejada em hexadecimal.
+
+## REST
+1. Colocar/Modificar um pixel:
+	### *Request*
+	>É enviado uma requisição POST na rota */tile* com a seguinte estrutura:
+	```py
+	{
+		"x": int,
+		"y": int,
+		"color": string
+	}
+	```
+	Sendo *x* e *y* as coordenadas de cada pixel no quadro, e a *color* a cor desejada em hexadecimal.
+	### *Response*
+  	O formato de resposta generico é o seguinte
+	
+	```py
+	{
+		"success": boolean,
+		"cooldown": float,
+		"error": string
+	}
+	```
+  	Caso o usuário consiga modificar um pixel o campo *__success__* vai ser *True*, caso constrario *False*, neste caso o campo error vai explicar o que esta de errado.
+	
+	Se o erro for devido ao usuário não ter esperado o tempo necessário para colocar o pixel o cooldown vai retornar o tempo restante, em caso de sucesso o campo cooldown também vai vir preenchido com o tempo de espera.
+
+2. Pegar o estado atual do quadro
+     ### *Request*
+	>É enviado uma requisição GET na rota */frame*.
+
+    ### *Response*
+    >É retornado uma imagem com o estado atual do quadro.
+
+3. Pegar tempo de espera do usuário
+    ### *Request*
+	>É enviado uma requisição GET na rota */timeStampUser*.
+	### *Responde*
+	>É retornado o tempo de espera do usuário em segundos.
 
 # Diagrama
 
