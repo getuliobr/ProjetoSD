@@ -86,7 +86,7 @@ Todas as mensagens cliente servidor são em formato JSON.
 
 2. Pegar o estado atual do quadro
      ### *Request*
-	>É enviado uma requisição GET na rota */frame*.
+	>É enviado uma requisição GET na rota */place*.
 
     ### *Response*
     >É retornado uma imagem com o estado atual do quadro.
@@ -104,6 +104,10 @@ Todas as mensagens cliente servidor são em formato JSON.
 
 # Dependências
 
-- FastAPI
-- websockets
-- uvicorn
+## Python
+	- FastAPI
+	- websockets
+	- uvicorn
+	- numpy
+	- sqlalchemy
+	- psycopg2
