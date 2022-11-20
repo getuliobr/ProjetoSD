@@ -109,5 +109,4 @@ Todas as mensagens cliente servidor são em formato JSON.
 	- websockets
 	- uvicorn
 	- numpy
-	- sqlalchemy
-	- psycopg2
+	- pymongo
