@@ -29,7 +29,7 @@ Projeto da disciplina de Sistemas Distribuidos.
   <a href="https://fastapi.tiangolo.com/"><img align="center" alt="fastapi" height="50" width="60"  src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/fastapi/fastapi-original-wordmark.svg" />
   <a href="https://tailwindcss.com/"><img align="center" alt="tailwind" height="50" width="60" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-plain.svg" /><a>
   <a href="https://www.docker.com/"><img align="center" alt="docker" height="50" width="60" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" /><a>
-  <a href="https://cassandra.apache.org/_/index.html"><img align="center" alt="mongodb" height="50" width="60" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original-wordmark.svg"/><a>
+  <a href="https://www.mongodb.com/"><img align="center" alt="mongodb" height="50" width="60" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original-wordmark.svg"/><a>
   <a href="https://redis.io/"><img align="center" alt="redis" height="50" width="60" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/redis/redis-original-wordmark.svg"/><a>
 
 </div>
