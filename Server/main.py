@@ -1,10 +1,11 @@
+import json
 from pstats import Stats
 import time
 from fastapi import FastAPI, HTTPException, Request
 import redis
 
 from Server.src.db.db import db
-from Server.src.dbHandler import getPlaceFromDb, putTileOnDb
+from Server.src.dbHandler import getPlaceFromDb, putTileOnDb, getClientTimeFromDb
 from Server.src.entities.tile import Tile
 from Server.src.entities.user import User
 from Server.src.redisHandler import getPlaceFromRedis
@@ -20,13 +21,21 @@ async def startup_event():
     app.PlaceCollection = db.Place
     app.COOLDOWN = 0
 
+@app.get("/timeStampUser")
+async def timeStampUser(request: Request):
+    ip = request.client.host
+    user = getClientTimeFromDb(ip)
+    converted_time = time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(user['time_from_last_tile']))
+    userResponse = {'ip': ip, 'time_from_last_tile': converted_time}
+    return userResponse
+
 @app.get("/place")
-def get_tiles():
+async def get_tiles():
     place = getPlaceFromRedis()
     return {"place": place}
 
 @app.post("/")
-def put_tile(tile: Tile, request : Request):
+async def put_tile(tile: Tile, request : Request):
     ip = request.client.host
     tile.ip = ip
     currTime = time.time()

@@ -1,4 +1,5 @@
 import json
+import time
 
 from pymongo import ReturnDocument
 from fastapi.encoders import jsonable_encoder
@@ -6,6 +7,15 @@ from Server.src.entities.tile import Tile
 from Server.src.entities.user import User
 from fastapi import HTTPException
 from .. import main
+
+
+def getClientTimeFromDb(ip):
+    user = main.app.UserCollection.find_one({'ip': ip},{'_id': False}
+    )
+    if user:
+        return user
+    return 0
+
 
 def getPlaceFromDb():
     placeItems = main.app.PlaceCollection.find({}, {'_id': False, 'ip': False})
