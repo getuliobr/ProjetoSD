@@ -19,4 +19,4 @@ WORKDIR /usr/src/app
 
 EXPOSE 8000
 
-ENTRYPOINT [ "uvicorn", "Server.main:app", "--port", "8000", "--host", "0.0.0.0", "--reload" ]
+ENTRYPOINT [ "uvicorn", "Server.main:app", "--port", "8000", "--host", "0.0.0.0"]

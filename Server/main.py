@@ -4,18 +4,19 @@ import time
 from fastapi import FastAPI, HTTPException, Request
 import redis
 
+from starlette.middleware import Middleware
+from starlette.middleware.cors import CORSMiddleware
 from Server.src.db.db import db
 from Server.src.dbHandler import getPlaceFromDb, putTileOnDb, getClientTimeFromDb
 from Server.src.entities.tile import Tile
 from Server.src.entities.user import User
 from Server.src.redisHandler import getPlaceFromRedis
 
-
 app = FastAPI()
 
 @app.on_event("startup")
 async def startup_event():
-    app.redisBase = redis.from_url('redis://localhost:6379', db=0)
+    app.redisBase = redis.from_url('redis://redis:6379', db=0)
     app.redisBase.reset()
     app.UserCollection = db.Users
     app.PlaceCollection = db.Place
