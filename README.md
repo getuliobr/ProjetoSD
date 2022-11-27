@@ -1,3 +1,4 @@
+
 # utPlace
 Projeto da disciplina de Sistemas Distribuidos.
 
@@ -39,74 +40,5 @@ Com o docker aberto digite o comando
 	
 	docker compose up
 
-# Interfaces de serviço
-
-Todas as mensagens cliente servidor são em formato JSON.
-
-## Websocket
-1. Receber uma modificação de pixel
-
-	Toda vez que um usuário modificar um pixel, todos os usuários são notificados por uma mensagem no websocket, com a seguinte estrutura
-
-	```py
-	{
-		"x": int,
-		"y": int,
-		"color": string
-	}
-	```
-
-	Sendo *x* e *y* as coordenadas de cada pixel no quadro, e a color a cor desejada em hexadecimal.
-
-## REST
-1. Colocar/Modificar um pixel:
-	### *Request*
-	>É enviado uma requisição POST na rota */tile* com a seguinte estrutura:
-	```py
-	{
-		"x": int,
-		"y": int,
-		"color": string
-	}
-	```
-	Sendo *x* e *y* as coordenadas de cada pixel no quadro, e a *color* a cor desejada em hexadecimal.
-	### *Response*
-  	O formato de resposta generico é o seguinte
-	
-	```py
-	{
-		"success": boolean,
-		"cooldown": float,
-		"error": string
-	}
-	```
-  	Caso o usuário consiga modificar um pixel o campo *__success__* vai ser *True*, caso constrario *False*, neste caso o campo error vai explicar o que esta de errado.
-	
-	Se o erro for devido ao usuário não ter esperado o tempo necessário para colocar o pixel o cooldown vai retornar o tempo restante, em caso de sucesso o campo cooldown também vai vir preenchido com o tempo de espera.
-
-2. Pegar o estado atual do quadro
-     ### *Request*
-	>É enviado uma requisição GET na rota */place*.
-
-    ### *Response*
-    >É retornado uma imagem com o estado atual do quadro.
-
-3. Pegar tempo de espera do usuário
-    ### *Request*
-	>É enviado uma requisição GET na rota */timeStampUser*.
-	### *Responde*
-	>É retornado o tempo de espera do usuário em segundos.
-
-# Diagrama
-
-<img src="util\utPlace.jpg"/>
-
-
-# Dependências
-
-## Python
-	- FastAPI
-	- websockets
-	- uvicorn
-	- numpy
-	- pymongo
+# [Interface de serviço](https://github.com/getuliobr/utPlace-sd/wiki/Interfaces-de-servi%C3%A7o)
+# [Diagrama](https://github.com/getuliobr/utPlace-sd/wiki/Diagrama-do-sistema)
