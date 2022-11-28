@@ -1,5 +1,4 @@
-
-# utPlace
+<img src="util\utplace-wiki-logo.jpg"/>
 Projeto da disciplina de Sistemas Distribuidos.
 
 # Alunos
