@@ -1,4 +1,4 @@
-FROM python:3.10.8-buster
+FROM tiangolo/uvicorn-gunicorn-fastapi:python3.10
 
 # Install dependencies
 RUN apt-get update && apt-get install -y \
