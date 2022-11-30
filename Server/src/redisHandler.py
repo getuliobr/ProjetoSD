@@ -1,6 +1,9 @@
 import json
+
 from Server.src.dbHandler import getPlaceFromDb
+
 from .. import main
+
 
 def getPlaceFromRedis():
     place = main.app.redisBase.get('place')

@@ -1,11 +1,13 @@
 import json
 import time
 
-from pymongo import ReturnDocument
+from fastapi import HTTPException
 from fastapi.encoders import jsonable_encoder
+from pymongo import ReturnDocument
+
 from Server.src.entities.tile import Tile
 from Server.src.entities.user import User
-from fastapi import HTTPException
+
 from .. import main
 
 
