@@ -44,7 +44,7 @@ def putTileOnDb(user: User, tile: Tile, currTime):
     if not userDb:
         raise HTTPException(status_code=400, content={'success': False, "message": "You can't put a tile so fast"})
     
-    color = tile.color
+    tile.color = tile.color.as_hex()
 
     if tile.x < 0 and tile.x >= 1000 or tile.y < 0 and tile.y >= 1000:
         raise HTTPException(status_code=400, content={'success': False, "message": "Out of bounds"})

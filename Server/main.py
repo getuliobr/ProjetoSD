@@ -14,11 +14,14 @@ from Server.src.redisHandler import getPlaceFromRedis
 
 app = FastAPI()
 logger = logging.getLogger()
+# password = ""
+
 
 @app.on_event("startup")
 async def startup_event():
-    app.redisBase = redis.from_url('redis://localhost:6379', db=0)  # type: ignore
-    app.redisBase.reset()  # type: ignore
+    app.redisBase = redis.from_url('redis://redis:6379', db=0)  # type: ignore
+    # app.redisBase = redis.StrictRedis(host='redis-19147.c9.us-east-1-4.ec2.cloud.redislabs.com', port=19147, db=0, username='default', password=password)  # type: ignore
+    # app.redisBase.reset()  # type: ignore
     app.UserCollection = db.Users  # type: ignore
     app.PlaceCollection = db.Place  # type: ignore
     app.COOLDOWN = 0  # type: ignore
@@ -28,8 +31,10 @@ async def startup_event():
 async def timeStampUser(request: Request):
     ip = request.client.host
     user = getClientTimeFromDb(ip)
-    converted_time = time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(user['time_from_last_tile']))
-    userResponse = {'ip': ip, 'time_from_last_tile': converted_time}
+    converted_time = 120 - (time.time() - user['time_from_last_tile'])
+    if converted_time < 0:
+        converted_time = 0
+    userResponse = {'ip': ip, 'cooldown_in_seconds': converted_time}
     return userResponse
 
 @app.get("/place")
