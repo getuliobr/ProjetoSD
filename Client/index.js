@@ -16,6 +16,7 @@ function setup() {
 }
 
 function draw() {
+  noSmooth();
 	background(100)
   translate(controls.view.x, controls.view.y);
   scale(controls.view.zoom)
@@ -29,10 +30,14 @@ window.mouseReleased = e => Controls.move(controls).mouseReleased(e);
 class Controls {
   static move(controls) {
     function mousePressed(e) {
-      console.log(controls.view, (e.clientX - controls.view.x)/controls.view.zoom, (e.clientY - controls.view.y)/controls.view.zoom)
+      const x = Math.floor((e.clientX - controls.view.x)/controls.view.zoom);
+      const y = Math.floor((e.clientY - controls.view.y)/controls.view.zoom);
       controls.viewPos.isDragging = true;
       controls.viewPos.prevX = e.clientX;
       controls.viewPos.prevY = e.clientY;
+      img.set(x,y, [random(255), random(255), random(255), 255])
+      img.updatePixels()
+      
     }
 
     function mouseDragged(e) {
@@ -73,8 +78,10 @@ class Controls {
     function worldZoom(e) {
       const {x, y, deltaY} = e;
       const direction = deltaY > 0 ? -1 : 1;
-      const factor = 0.01;
+      const factor = 1;
       let zoom = 1 * direction * factor;
+
+      if(controls.view.zoom + zoom < 1 || controls.view.zoom + zoom > 16) return; 
       
       const wx = (x-controls.view.x)/(width*controls.view.zoom);
       const wy = (y-controls.view.y)/(height*controls.view.zoom);
