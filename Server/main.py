@@ -11,8 +11,22 @@ from Server.src.dbHandler import (getClientTimeFromDb, getPlaceFromDb,
 from Server.src.entities.tile import Tile
 from Server.src.entities.user import User
 from Server.src.redisHandler import getPlaceFromRedis
+from fastapi.middleware.cors import CORSMiddleware
+from fastapi.middleware import Middleware
 
-app = FastAPI()
+middleware = [
+    Middleware(
+        CORSMiddleware,
+        allow_origins=["*"],
+        allow_credentials=True,
+        allow_methods=["*"],
+        allow_headers=["*"],
+    )
+]
+
+
+app = FastAPI(middleware=middleware)
+
 logger = logging.getLogger()
 # password = ""
 
@@ -31,7 +45,7 @@ async def startup_event():
 async def timeStampUser(request: Request):
     ip = request.client.host
     user = getClientTimeFromDb(ip)
-    converted_time = 120 - (time.time() - user['time_from_last_tile'])
+    converted_time = app.COOLDOWN - (time.time() - user['time_from_last_tile'])
     if converted_time < 0:
         converted_time = 0
     userResponse = {'ip': ip, 'cooldown_in_seconds': converted_time}
