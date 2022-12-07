@@ -40,11 +40,11 @@ const setTile = async (x, y, color) => {
 
 function preload() {
 
-  controls.view.x = (window.innerWidth - 100*controls.view.zoom)/2;
+  controls.view.x = (window.innerWidth - 200*controls.view.zoom)/2;
   controls.view.y = (window.innerHeight - 100*controls.view.zoom)/2;
 
 
-  img = createImage(100, 100);
+  img = createImage(300, 300);
   for (let i = 0; i < img.width; i++) {
     for (let j = 0; j < img.height; j++) {
       img.set(i, j, color(255, 255, 255));
