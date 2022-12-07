@@ -55,6 +55,42 @@ services:
       - 27023:27017
     restart: always
     entrypoint: [ "/usr/bin/mongod", "--bind_ip_all", "--replSet", "dbrs" ]
+    
+  mongoinit:
+    image: mongo:4.4
+    # this container will exit after executing the command
+    restart: "no"
+    depends_on:
+      - mongo1
+      - mongo2
+      - mongo3
+    command: >
+      mongo --host mongo1:27017 --eval 
+      '
+      db = (new Mongo("localhost:27017")).getDB("test");
+      config = {
+      "_id" : "dbrs",
+      "version" : 1,
+      "members" : [
+        {
+          "_id": 1,
+            "host": "mongo1:27017",
+            "priority": 2
+        },
+        {
+          "_id": 2,
+            "host": "mongo2:27017",
+            "priority": 1
+        },
+        {
+          "_id": 3,
+            "host": "mongo3:27017",
+            "priority": 1
+        }
+      ]
+      };
+      rs.initiate(config);
+      '  
 
 networks:
   mongors-network:
