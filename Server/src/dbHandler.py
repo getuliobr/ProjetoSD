@@ -32,6 +32,10 @@ def getPlaceFromDb():
     return place
 
 def putTileOnDb(user: User, tile: Tile, currTime):
+    dbUser = getClientTimeFromDb(user.ip)
+    if dbUser != 0:
+        if (currTime - dbUser['time_from_last_tile'] < main.app.COOLDOWN):
+            raise HTTPException(400, 'Not so fast sanic!')
     userDb = main.app.UserCollection.find_one_and_update({
             'ip': user.ip,
             'time_from_last_tile': {
