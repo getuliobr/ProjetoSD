@@ -35,7 +35,9 @@ Projeto da disciplina de Sistemas Distribuidos.
 </div>
 
 # Como rodar
-Com o docker aberto digite o comando
+Instale o docker e o docker-compose na sua maquina.
+
+Com o docker aberto digite o comando:
 	
 	docker compose up
 
