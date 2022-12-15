@@ -6,6 +6,8 @@ services:
     image: redis:latest
     ports:
       - "6379:6379"
+    expose:
+      - 6379
     volumes:
       - ./data:/data
     networks:
@@ -22,6 +24,7 @@ services:
       - "8000:8000"
     depends_on:
       - redis
+      - mongoinit
   mongo1:
     container_name: mongo1
     image: mongo:4.4
@@ -65,6 +68,41 @@ services:
       - 27023:27017
     restart: always
     command: mongod --replSet dbrs
+  mongoinit:
+    image: mongo:4.4
+    restart: "no"
+    networks:
+      - trabalhosd
+    depends_on:
+      - mongo1
+      - mongo2
+      - mongo3
+    command: >
+      sleep 10 && mongo --host mongo1:27017 --eval 
+      '
+      config = {
+      "_id" : "dbrs",
+      "version" : 1,
+      "members" : [
+        {
+          "_id": 1,
+            "host": "mongo1:27017",
+            "priority": 2
+        },
+        {
+          "_id": 2,
+            "host": "mongo2:27017",
+            "priority": 1
+        },
+        {
+          "_id": 3,
+            "host": "mongo3:27017",
+            "priority": 1
+        }
+      ]
+      };
+      rs.initiate(config);
+      '  
 
 networks:
   trabalhosd:
